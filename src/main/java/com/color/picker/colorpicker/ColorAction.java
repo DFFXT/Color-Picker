@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+
+@Deprecated
 public class ColorAction extends AnAction {
 
     // 当前显示颜色
