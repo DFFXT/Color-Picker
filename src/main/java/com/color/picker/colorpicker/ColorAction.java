@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+@NotNull
 public class ColorAction extends AnAction {
 
     // 当前显示颜色
