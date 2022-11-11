@@ -7,6 +7,11 @@ import org.jetbrains.annotations.Nullable;
  * 颜色提取
  */
 public abstract class ColorMatcher {
+
+    /**
+     * 最大字符长度
+     */
+    private static final int MAX_LENGTH = 10;
     /**
      * 格式化字符串
      *
@@ -15,7 +20,7 @@ public abstract class ColorMatcher {
      */
     @NotNull
     protected String getFormatContent(@NotNull String selectedContent) {
-        return selectedContent.replace(" ", "");
+        return selectedContent.trim();
     }
 
     /**
@@ -25,7 +30,7 @@ public abstract class ColorMatcher {
      * @return 颜色字符串
      */
     @Nullable
-    protected abstract String getHexColorString(@NotNull String content);
+    protected abstract String getHexColorString(@Nullable String beforeText, @NotNull String content);
 
     /**
      * 获取字符串中的颜色值
@@ -34,10 +39,10 @@ public abstract class ColorMatcher {
      * @return 颜色对应的int值，没有则null
      */
     @Nullable
-    public Integer extractColor(@NotNull String content) {
+    public Integer extractColor(@Nullable String beforeText, @NotNull String content) {
         String formatString = getFormatContent(content);
-        if (formatString.isEmpty()) return null;
-        String hexString = getHexColorString(content);
+        if (formatString.isEmpty() || formatString.length() > MAX_LENGTH) return null;
+        String hexString = getHexColorString(beforeText, formatString);
         if (hexString != null && !hexString.isEmpty()) {
             try {
                 return (int) Long.parseLong(hexString, 16);

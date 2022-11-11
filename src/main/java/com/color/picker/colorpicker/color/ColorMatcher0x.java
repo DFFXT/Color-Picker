@@ -13,7 +13,7 @@ public class ColorMatcher0x extends ColorMatcher {
     private static final Pattern colorPattern8 = Pattern.compile("^0x[A-F|a-f\\d]{8}");
 
     @Override
-    protected @Nullable String getHexColorString(@NotNull String content) {
+    protected @Nullable String getHexColorString(@Nullable String beforeText, @NotNull String content) {
         Matcher matcher = colorPattern8.matcher(content);
         if (matcher.find()) {
             return matcher.group().substring(2, 10);
